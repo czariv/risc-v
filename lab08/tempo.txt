@@ -1,0 +1,4 @@
+acelerando: 4.5
+nada:1
+feiando:3
+virando dir: 2

@@ -1,0 +1,50 @@
+IF      ID      EX      M       WB
+addit0
+addit1  addit0
+addt2   addit1  addit0
+addit1  addt2   addit1  addit0
+lw      addit1  addt2   addit1  addit0
+add     lw      addit1  addt2   addit1
+addit0  add     lw      addit1  addt2
+addit0  add     <>      lw      addit1
+bne     addit0  add     <>      lw
+add     bne     addit0  add     <>
+add     add     bne     addit0  add
+<>      <>      <>      bne     addit0
+addit1  <>      <>      <>      bne
+lw      addit1  <>      <>      <>
+add     lw      addit1  <>      <>
+addit0  add     lw      addit1  <>
+addit0  add     <>      lw      addit1
+bne     addit0  add     <>      lw
+add     bne     addit0  add     <>
+add     add     bne     addit0  add
+addi    add     add     bne     addit0
+<>      addi    add     add     bne
+<>      <>      addi    add     add
+<>      <>      <>      addi    add
+<>      <>      <>      <>      addi
+
+
+main  : addi t0 ,zero ,0 x80    |1
+        addi t1 ,zero ,X        |1
+        add t2 ,zero , zero     |1
+loop  : addi t1 ,t1 ,-1         |N
+        lw t3 ,0( t0)           |N * 2
+        add t2 ,t2 ,t3          |N
+        addi t0 ,t0 ,4          |N
+        bne t1 ,zero , loop     |(N - 1)*2 + 1
+        add a0 ,t2 , zero       |1
+        add t0 ,zero , zero     |1
+        addi t1 ,zero ,1        |1 + 4
+
+3 + 5*N + (N - 1)*4 + 1 + 7
+7 + 9*N ciclos
+
+
+add
+sub	add
+lw	sub	add
+xor	lw	sub	add
+not	xor	lw	sub	add
+not	xor	<>	lw	sub
